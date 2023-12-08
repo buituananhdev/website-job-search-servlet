@@ -48,6 +48,11 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>9.0.70</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version> <!-- or use the latest version available -->
+        </dependency>
     </dependencies>
 
     <build>

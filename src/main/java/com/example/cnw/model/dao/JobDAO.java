@@ -39,6 +39,78 @@ public class JobDAO {
         return jobs;
     }
 
+    public List<Job> getFilteredJobs(String keyword, String location, String salary) {
+        List<Job> filteredJobList = new ArrayList<>();
+
+        keyword = (keyword != null) ? keyword.trim() : "";
+        location = (location != null && !"all".equals(location)) ? location.trim() : "";
+        salary = (salary != null && !"0".equals(salary)) ? salary.trim() : "";
+
+        String filteredQuery = GET_ALL_JOBS;
+
+        if (!keyword.isEmpty() || !location.isEmpty() || !salary.isEmpty()) {
+            filteredQuery += " WHERE ";
+            if (!keyword.isEmpty()) {
+                filteredQuery += "title LIKE ? AND ";
+            }
+            if (!location.isEmpty()) {
+                filteredQuery += "location = ? AND ";
+            }
+            if (!salary.isEmpty()) {
+                filteredQuery += getSalaryRangeCondition(Integer.parseInt(salary)) + " AND ";
+            }
+
+            filteredQuery = filteredQuery.replaceAll(" AND $", "");
+        }
+
+        try (Connection connection = DButils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(filteredQuery)) {
+
+            int parameterIndex = 1;
+            if (!keyword.isEmpty()) {
+                preparedStatement.setString(parameterIndex++, "%" + keyword + "%");
+            }
+            if (!location.isEmpty()) {
+                preparedStatement.setString(parameterIndex++, location);
+            }
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Job job = new Job();
+                    job.setJobId(resultSet.getInt("job_id"));
+                    job.setTitle(resultSet.getString("title"));
+                    job.setDescription(resultSet.getString("description"));
+                    job.setRequirements(resultSet.getString("requirements"));
+                    job.setSalary(resultSet.getDouble("salary"));
+                    job.setLocation(resultSet.getString("location"));
+                    job.setCompanyId(resultSet.getInt("company_id"));
+                    filteredJobList.add(job);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return filteredJobList;
+    }
+
+    private String getSalaryRangeCondition(int salaryCode) {
+        switch (salaryCode) {
+            case 1:
+                return "salary < 10000000"; // Dưới 10 triệu
+            case 2:
+                return "salary BETWEEN 10000000 AND 15000000"; // 10 - 15 triệu
+            case 3:
+                return "salary BETWEEN 15000000 AND 20000000"; // 15 - 20 triệu
+            case 4:
+                return "salary BETWEEN 20000000 AND 25000000"; // 20 - 25 triệu
+            case 5:
+                return "salary > 25000000"; // Trên 25 triệu
+            default:
+                return ""; // Handle the default case or throw an exception based on your requirements
+        }
+    }
+
     public Job getJobById(int jobId) {
         Job job = null;
         try (Connection connection = DButils.getConnection();
