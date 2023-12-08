@@ -15,6 +15,10 @@ public class JobBO {
         return jobDAO.getAllJobs();
     }
 
+    public List<Job> getFilteredJobs(String keyword, String location, String salary) {
+        return jobDAO.getFilteredJobs(keyword, location, salary);
+    }
+
     public Job getJobById(int jobId) {
         return jobDAO.getJobById(jobId);
     }
