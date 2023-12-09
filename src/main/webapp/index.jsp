@@ -86,23 +86,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job List</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="font-sans bg-gray-100">
 <%@ include file="/components/layouts/header.jsp" %>
 <section id="jobs-area" class="container mx-auto mt-8 pb-100">
     <header>
-        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
+        <h2 class="text-3xl font-semibold text-[#009643] mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
         <p class="text-gray-600">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
     </header>
     <form class="flex space-x-4 my-4" method="get" action="<%= request.getRequestURI() %>">
-        <div class="relative flex items-center">
+        <div class="h-full relative flex items-center rounded-lg">
             <input type="text" name="keyword" placeholder="Vị trí tuyển dụng" id="keyword" autocomplete="off"
                    value="<%= (keyword == null) ? "" : keyword %>" class="filter-box p-4 rounded border border-gray-300 px-10">
             <img src="./assets/icons/icn-search.svg" alt="" class="absolute left-4 top-1/2 transform -translate-y-1/2">
         </div>
         <div class="filter-box">
-            <select name="search-location" id="search-location" class="w-full border-none border rounded p-4">
+            <select name="search-location" id="search-location" class="w-full h-full border-none border rounded p-4 rounded-lg">
                 <option value="all" disabled selected>Vị trí</option>
                 <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Toàn quốc</option>
                 <% for (String city : cityList) { %>
@@ -111,7 +111,7 @@
             </select>
         </div>
         <div class="filter-box">
-            <select name="search-salary" id="search-salary" class="w-full border-none border rounded p-4">
+            <select name="search-salary" id="search-salary" class="w-full h-full border-none border rounded p-4 rounded-lg">
                 <option value="0" <%=(salary == null || "0".equals(salary)) ? "selected" : ""%>>Tất cả mức lương</option>
                 <option value="1" <%=(salary != null && "1".equals(salary)) ? "selected" : ""%>>Dưới 10 triệu</option>
                 <option value="2" <%=(salary != null && "2".equals(salary)) ? "selected" : ""%>>10 - 15 triệu</option>
@@ -120,9 +120,9 @@
                 <option value="5" <%=(salary != null && "5".equals(salary)) ? "selected" : ""%>>Trên 25 triệu</option>
             </select>
         </div>
-        <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-sm shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white">Tìm kiếm</button>
+        <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white">Tìm kiếm</button>
     </form>
-    <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4" style="padding-bottom: 100px">
         <% for (JobDTO job : filteredJobList) { %>
         <a href=jobs?jobId=<%= job.getJobId()%>>
             <div class="job-card bg-white shadow-md p-4 rounded">
