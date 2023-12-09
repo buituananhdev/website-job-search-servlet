@@ -5,13 +5,14 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="com.example.cnw.model.dto.JobDTO" %>
 <%
     String keyword = request.getParameter("keyword");
     String location = request.getParameter("search-location");
     String salary = request.getParameter("search-salary");
 
     JobBO jobBO = new JobBO();
-    List<Job> filteredJobList = jobBO.getFilteredJobs(keyword, location, salary);
+    List<JobDTO> filteredJobList = jobBO.getFilteredJobs(keyword, location, salary);
 
     List<String> cityList = new ArrayList<>(List.of(
             "Hồ Chí Minh",
@@ -122,12 +123,12 @@
         <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-sm shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white">Tìm kiếm</button>
     </form>
     <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <% for (Job job : filteredJobList) { %>
+        <% for (JobDTO job : filteredJobList) { %>
         <a href=jobs?jobId=<%= job.getJobId()%>>
             <div class="job-card bg-white shadow-md p-4 rounded">
                 <div class="flex flex-col">
                     <span class="title text-blue-900 font-semibold text-lg mb-2"><%= job.getTitle() %></span>
-                    <span class="company text-gray-600"><%= job.getCompanyId() %></span>
+                    <span class="company text-gray-600"><%= job.getCompanyName() %></span>
                 </div>
                 <div class="flex items-center mt-2">
                     <span class="salary bg-gray-100 px-2 py-1 rounded text-gray-700 mr-2"><%= NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(job.getSalary()) %></span>

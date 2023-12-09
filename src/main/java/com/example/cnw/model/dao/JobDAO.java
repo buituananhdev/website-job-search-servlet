@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.cnw.model.bean.Company;
+import com.example.cnw.model.bo.CompanyBO;
+import com.example.cnw.model.dto.JobDTO;
 import com.example.cnw.utils.DButils;
 import com.example.cnw.model.bean.Job;
 
@@ -16,21 +20,22 @@ public class JobDAO {
     private final String UPDATE_JOB = "UPDATE Jobs SET title=?, description=?, requirements=?, salary=?, location=?, company_id=? WHERE job_id=?";
     private final String DELETE_JOB = "DELETE FROM Jobs WHERE job_id=?";
 
-    public List<Job> getAllJobs() {
-        List<Job> jobs = new ArrayList<>();
+    public List<JobDTO> getAllJobs() {
+        List<JobDTO> jobs = new ArrayList<>();
         try (Connection connection = DButils.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_JOBS);
              ResultSet resultSet = preparedStatement.executeQuery()) {
-
+            CompanyBO companyBO = new CompanyBO();
             while (resultSet.next()) {
-                Job job = new Job();
+                JobDTO job = new JobDTO();
                 job.setJobId(resultSet.getInt("job_id"));
                 job.setTitle(resultSet.getString("title"));
                 job.setDescription(resultSet.getString("description"));
                 job.setRequirements(resultSet.getString("requirements"));
                 job.setSalary(resultSet.getDouble("salary"));
                 job.setLocation(resultSet.getString("location"));
-                job.setCompanyId(resultSet.getInt("company_id"));
+                Company company = companyBO.getCompanyById(resultSet.getInt("company_id"));
+                job.setCompanyName(company.getName());
                 jobs.add(job);
             }
         } catch (SQLException e) {
@@ -39,8 +44,8 @@ public class JobDAO {
         return jobs;
     }
 
-    public List<Job> getFilteredJobs(String keyword, String location, String salary) {
-        List<Job> filteredJobList = new ArrayList<>();
+    public List<JobDTO> getFilteredJobs(String keyword, String location, String salary) {
+        List<JobDTO> filteredJobList = new ArrayList<>();
 
         keyword = (keyword != null) ? keyword.trim() : "";
         location = (location != null && !"all".equals(location)) ? location.trim() : "";
@@ -76,14 +81,16 @@ public class JobDAO {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    Job job = new Job();
+                    JobDTO job = new JobDTO();
                     job.setJobId(resultSet.getInt("job_id"));
                     job.setTitle(resultSet.getString("title"));
                     job.setDescription(resultSet.getString("description"));
                     job.setRequirements(resultSet.getString("requirements"));
                     job.setSalary(resultSet.getDouble("salary"));
                     job.setLocation(resultSet.getString("location"));
-                    job.setCompanyId(resultSet.getInt("company_id"));
+                    CompanyBO companyBO = new CompanyBO();
+                    Company company = companyBO.getCompanyById(resultSet.getInt("company_id"));
+                    job.setCompanyName(company.getName());
                     filteredJobList.add(job);
                 }
             }
