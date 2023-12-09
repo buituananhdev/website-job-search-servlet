@@ -5,16 +5,18 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="com.example.cnw.model.bean.Account" %>
 <%
-    boolean isLoggedIn = session.getAttribute("account") != null;
+    Account currentUser = (Account) session.getAttribute("account");
     String keyword = request.getParameter("keyword");
     String location = request.getParameter("search-location");
     String salary = request.getParameter("search-salary");
 
     JobBO jobBO = new JobBO();
     List<Job> filteredJobList = jobBO.getFilteredJobs(keyword, location, salary);
+
     List<String> cityList = new ArrayList<>(List.of(
-            "Thành phố Hồ Chí Minh",
+            "Hồ Chí Minh",
             "Hà Nội",
             "Đà Nẵng",
             "Hải Phòng",
@@ -96,13 +98,19 @@
                 <a href="" class="text-gray-800">Bài lập nhóm Công nghệ Web</a>
             </div>
         </div>
-        <% if (!isLoggedIn) { %>
+        <% if (currentUser == null) { %>
         <div class="flex space-x-4">
-            <a href="/cnw_war_exploded/auth/login.jsp" class="btn">Đăng nhập</a>
+            <a href="auth/login.jsp" class="btn">Đăng nhập</a>
             <a href="signup" class="btn">Đăng ký</a>
             <a href="hiring" class="btn">Đăng ký tuyển dụng</a>
         </div>
+        <% } else { %>
+        <div class="flex space-x-4">
+            <p><%= currentUser.getEmail() %></p>
+            <p><%= currentUser.getRole() %></p>
+        </div>
         <% } %>
+
     </div>
 </nav>
 <section id="jobs-area" class="container mx-auto mt-8 pb-100">
@@ -118,7 +126,8 @@
         </div>
         <div class="filter-box">
             <select name="search-location" id="search-location" class="w-full border-none border rounded p-4">
-                <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Vị trí</option>
+                <option value="all" disabled selected>Vị trí</option>
+                <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Toàn quốc</option>
                 <% for (String city : cityList) { %>
                     <option value="<%= city %>" <%=(location != null && city.equals(location)) ? "selected" : ""%>> <%= city %></option>
                 <% } %>
@@ -126,9 +135,7 @@
         </div>
         <div class="filter-box">
             <select name="search-salary" id="search-salary" class="w-full border-none border rounded p-4">
-                <option value="0" <%=(salary == null || "0".equals(salary)) ? "selected" : ""%>>Mức lương</option>
-                <option value="0" <%=(salary != null && "0".equals(salary)) ? "selected" : ""%>>Tất cả mức lương
-                </option>
+                <option value="0" <%=(salary == null || "0".equals(salary)) ? "selected" : ""%>>Tất cả mức lương</option>
                 <option value="1" <%=(salary != null && "1".equals(salary)) ? "selected" : ""%>>Dưới 10 triệu</option>
                 <option value="2" <%=(salary != null && "2".equals(salary)) ? "selected" : ""%>>10 - 15 triệu</option>
                 <option value="3" <%=(salary != null && "3".equals(salary)) ? "selected" : ""%>>15 - 20 triệu</option>
@@ -141,7 +148,7 @@
     <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <% for (Job job : filteredJobList) { %>
         <a href=jobs?jobId=<%= job.getJobId()%>>
-            <div class="job-card bg-white shadow-md p-6 rounded">
+            <div class="job-card bg-white shadow-md p-4 rounded">
                 <div class="flex flex-col">
                     <span class="title text-blue-900 font-semibold text-lg mb-2"><%= job.getTitle() %></span>
                     <span class="company text-gray-600"><%= job.getCompanyId() %></span>

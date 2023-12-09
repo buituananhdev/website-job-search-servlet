@@ -23,6 +23,7 @@ public class AccountDAO {
                     account.setAccountId(resultSet.getInt("account_id"));
                     account.setEmail(resultSet.getString("email"));
                     account.setPassword(resultSet.getString("password"));
+                    account.setRole(resultSet.getString("role"));
                 }
             }
         } catch (SQLException e) {
