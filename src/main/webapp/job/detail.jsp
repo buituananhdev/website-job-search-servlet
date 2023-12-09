@@ -8,32 +8,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.cnw.model.bean.Job" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.cnw.controller.ApplicantController" %>
 <html>
 <head>
     <title>Title</title>
-<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">--%>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .job-inf {
+            box-shadow:0px 0px 11px 0px #e2e2e2;
+        }
+    </style>
 </head>
-<style>
-    /*.container {*/
-    /*    background-color: #f4f4f4;*/
-    /*    width: 100%;*/
-    /*    height: 100vh;*/
-    /*    overflow: hidden;*/
-    /*}*/
-    .content {
-        height: 100%;
-        padding: 40px;
-        max-width: 1000px;
-        margin: auto;
-    }
-</style>
 <body>
+<%@ include file="../components/layouts/header.jsp" %>
 <% Job job = (Job) request.getAttribute("job");%>
-<div class="bg-[#f4f4f4] h-[100vh] w-full overflow-hidden">
-    <div class="h-full p-[40px] max-w-[1000px] m-auto">
-        <h2 class="title text-2xl text-[#009643] font-bold mb-10">Thông tin công ty</h2>
-        <div class="job-inf p-4 rounded-lg bg-[white] mb-6 shadow-sm">
+<div class="bg-[#f4f4f4] p-[40px] mt-40px rounded-lg h-[100vh] w-full overflow-hidden h-fit ">
+    <div class="h-full p-[40px] max-w-[1000px] m-auto mt-40px rounded-2xl h-[100vh] bg-white overflow-hidden h-fit ">
+        <h2 class="title text-2xl w-full text-[#009643] font-bold mb-12">Thông tin công ty</h2>
+        <form method="POST" action="applicants?job_id=<%= job.getJobId()%>" class="job-inf p-8 rounded-lg bg-[white] w-full mb-10">
             <h4 class="text-lg font-semibold pb-4"><%= job.getTitle()%></h4>
             <div class="job-content flex gap-5 mb-2">
                 <b>Công ty:</b>
@@ -49,10 +41,13 @@
                     <b><%=  job.getLocation()%></b>
                 </div>
             </div>
-            <a href="/applicants?job_id=<%job.getJobId();%>&candidate_id" class="apply-button w-full bg-[#009643] text-white rounded-md py-1.5 ">Ứng tuyển</a>
-        </div>
-
-        <div class="job-inf p-4 rounded-lg bg-[white] shadow-sm mb-8">
+            <input type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm
+                font-bold bg-[#009643] leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4
+                focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4
+                md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white"
+            value="Ứng tuyển"/>
+        </form>
+        <div class="job-inf p-8 rounded-lg bg-[white] mb-8">
             <h4 class="req-title text-lg border-[#009643] border-s-4 font-semibold py-2 pl-2 ">  Chi tiết tin tuyển dụng</h4>
             <div class="job-inf-description mb-4 pl-4">
                 <b>Mô tả công viêc</b>

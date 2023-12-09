@@ -32,4 +32,20 @@ public class AccountDAO {
         }
         return account;
     }
+
+    public int getIdCandidate(int accountId) {
+        int candidateId = 0;
+        try (Connection connection = DButils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ID_CANDIDATE)) {
+            preparedStatement.setInt(1, accountId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    candidateId = resultSet.getInt("candidate_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return candidateId;
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ApplicantDAO {
     private final String GET_APPLICANTS_BY_ID_CANDIDATE = "SELECT * FROM Applicants WHERE candidate_id=?";
-    private final String ADD_APPLICANT = "INSERT INTO Applicants (applicant_id, candidate_id, job_id) VALUES (?, ?, ?)";
+    private final String ADD_APPLICANT = "INSERT INTO Applicants (candidate_id, job_id) VALUES (?, ?)";
     private final String DELETE_APPLICANT = "DELETE FROM Applicants WHERE applicant_id=?";
 
     public List<Applicant> getApplicantsByCandidateId(int candidate_id) {
