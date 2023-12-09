@@ -3,8 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%
-    boolean isLoggedIn = session.getAttribute("user") != null;
+    boolean isLoggedIn = session.getAttribute("account") != null;
     String keyword = request.getParameter("keyword");
     String location = request.getParameter("search-location");
     String salary = request.getParameter("search-salary");
@@ -77,183 +79,53 @@
             "Yên Bái"
     ));
 %>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job List</title>
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .job-container {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin: 20px auto;
-        }
-
-        .job-card {
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            border-radius: 5px;
-            text-align: left;
-        }
-
-        .job-card div {
-            display: flex;
-        }
-
-        .top-infor {
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .bottom-infor {
-            flex-direction: row;
-            justify-content: flex-start;
-            gap: 8px;
-        }
-
-        .title {
-            color: #212f3f;
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 20px;
-        }
-
-        .company {
-            color: #6f7882;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-        }
-
-        .bottom-infor span {
-            background: #f4f5f5;
-            border-radius: 4px;
-            color: #212f3f;
-            display: inline-flex;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-            padding: 4px 8px;
-            color: #212f3f;
-            display: inline-flex;
-            font-size: 12px;
-            font-weight: 500;
-            line-height: 16px;
-        }
-
-        .filter {
-            width: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .filter-box {
-            height: 56px;
-            width: 253px;
-        }
-
-        .filter-box input,
-        select {
-            border: none;
-            border-radius: 6px !important;
-            font-size: 14px;
-            font-weight: 500;
-            height: 100%;
-            outline: none;
-            padding: 19px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, .03);
-        }
-
-        .search-title {
-            position: relative;
-        }
-
-        .search-title img {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            top: 13px;
-            left: 15px;
-        }
-
-        .search-title input {
-            padding-left: 52px;
-        }
-
-        .btn {
-            width: 120px;
-            height: 100%;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 24px;
-            margin-top: 0;
-            min-width: 120px;
-            padding-bottom: 15px;
-            padding-top: 15px;
-            transition: .3s;
-            background: #00b14f;
-            border-radius: 6px;
-            color: #fff;
-            padding: 6px 12px;
-            margin-bottom: 0;
-            border: 1px solid transparent;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body>
-<nav id="nav">
-    <div class="nav-container">
-        <div class="nav-left">
-            <img src="./assets/images/topcv-logo-6.webp" alt="">
+<body class="font-sans bg-gray-100">
+<nav id="nav" class="bg-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+<%--            <img src="./assets/images/topcv-logo-6.webp" alt="" class="mr-4 w-[100px]">--%>
             <div class="nav-link">
-                <a href="">Việc làm</a>
+                <a href="" class="text-gray-800">Bài lập nhóm Công nghệ Web</a>
             </div>
         </div>
         <% if (!isLoggedIn) { %>
-        <div class="nav-right">
-            <a class="btn" href="/cnw_war_exploded/auth/login.jsp">Đăng nhập</a>
-            <a class="btn" href="signup">Đăng ký</a>
-            <a class="btn" href="hiring">Đăng ký tuyển dụng</a>
+        <div class="flex space-x-4">
+            <a href="/cnw_war_exploded/auth/login.jsp" class="btn">Đăng nhập</a>
+            <a href="signup" class="btn">Đăng ký</a>
+            <a href="hiring" class="btn">Đăng ký tuyển dụng</a>
         </div>
         <% } %>
     </div>
 </nav>
-<section id="jobs-area" class="container">
+<section id="jobs-area" class="container mx-auto mt-8 pb-100">
     <header>
-        <h2 class="title">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
-        <p class="description">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại
-            Việt Nam</p>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
+        <p class="text-gray-600">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
     </header>
-    <form class="filter" method="get" action="<%= request.getRequestURI() %>">
-        <div class="search-title filter-box">
+    <form class="flex space-x-4 my-4" method="get" action="<%= request.getRequestURI() %>">
+        <div class="relative flex items-center">
             <input type="text" name="keyword" placeholder="Vị trí tuyển dụng" id="keyword" autocomplete="off"
-                   value="<%= (keyword == null) ? "" : keyword %>">
-            <img src="./assets/icons/icn-search.svg" alt="">
+                   value="<%= (keyword == null) ? "" : keyword %>" class="filter-box p-4 rounded border border-gray-300 px-10">
+            <img src="./assets/icons/icn-search.svg" alt="" class="absolute left-4 top-1/2 transform -translate-y-1/2">
         </div>
-        <div class="search-location filter-box">
-            <select name="search-location" id="search-location">
+        <div class="filter-box">
+            <select name="search-location" id="search-location" class="w-full border-none border rounded p-4">
                 <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Vị trí</option>
-                <option value="all" <%=(location != null && "all".equals(location)) ? "selected" : ""%>>Tất cả</option>
                 <% for (String city : cityList) { %>
-                    <option value="<%= city %>" <%=(location != null && city.equals(location)) ? "selected" : ""%>> <%= city %>
-                    </option>
+                    <option value="<%= city %>" <%=(location != null && city.equals(location)) ? "selected" : ""%>> <%= city %></option>
                 <% } %>
             </select>
         </div>
-        <div class="search-salary filter-box">
-            <select name="search-salary" id="search-salary">
+        <div class="filter-box">
+            <select name="search-salary" id="search-salary" class="w-full border-none border rounded p-4">
                 <option value="0" <%=(salary == null || "0".equals(salary)) ? "selected" : ""%>>Mức lương</option>
                 <option value="0" <%=(salary != null && "0".equals(salary)) ? "selected" : ""%>>Tất cả mức lương
                 </option>
@@ -264,24 +136,29 @@
                 <option value="5" <%=(salary != null && "5".equals(salary)) ? "selected" : ""%>>Trên 25 triệu</option>
             </select>
         </div>
-        <button type="submit" class="btn">Tìm kiếm</button>
+        <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-sm shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white">Tìm kiếm</button>
     </form>
-    <section id="jobs-grid" class="job-container">
+    <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <% for (Job job : filteredJobList) { %>
         <a href=jobs?jobId=<%= job.getJobId()%>>
-            <div class="job-card">
-                <div class="top-infor">
-                    <span class="title"><%= job.getTitle() %></span>
-                    <span class="company"><%= job.getCompanyId() %></span>
+            <div class="job-card bg-white shadow-md p-6 rounded">
+                <div class="flex flex-col">
+                    <span class="title text-blue-900 font-semibold text-lg mb-2"><%= job.getTitle() %></span>
+                    <span class="company text-gray-600"><%= job.getCompanyId() %></span>
                 </div>
-                <div class="bottom-infor">
-                    <span class="salary"><%= job.getSalary() %></span>
-                    <span class="location"><%= job.getLocation() %></span>
+                <div class="flex items-center mt-2">
+                    <span class="salary bg-gray-100 px-2 py-1 rounded text-gray-700 mr-2"><%= NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(job.getSalary()) %></span>
+                    <span class="location text-gray-700"><%= job.getLocation() %></span>
                 </div>
             </div>
         </a>
         <% } %>
     </section>
+    <% if (filteredJobList.size() == 0) { %>
+        <div class="w-full h-full flex justify-center items-center">
+            <img class="" src="assets/icons/not-found.svg">
+        </div>
+    <% } %>
 </section>
 </body>
 </html>
