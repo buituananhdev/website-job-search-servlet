@@ -11,10 +11,10 @@ public class Account {
     public Account() {
         // Default constructor
     }
-    public Account(int accountId, String email, String password) {
-        this.accountId = accountId;
+    public Account(String email, String password, String role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     // Getter for accountId

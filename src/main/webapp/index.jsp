@@ -93,7 +93,7 @@
 <section id="jobs-area" class="container mx-auto mt-8 pb-100 flex flex-col items-center">
     <header>
         <h2 class="text-3xl font-semibold text-[#009643] mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
-        <p class="text-gray-600">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
+        <p class="text-gray-600 text-center">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
     </header>
     <form class="flex space-x-4 my-4" method="get" action="<%= request.getRequestURI() %>">
         <div class="h-full relative flex items-center rounded-lg">
