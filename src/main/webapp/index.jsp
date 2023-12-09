@@ -98,7 +98,7 @@
         </div>
         <% if (!isLoggedIn) { %>
         <div class="flex space-x-4">
-            <a href="/cnw_war_exploded/auth/login.jsp" class="btn">Đăng nhập</a>
+            <a href=auth/login.jsp class="btn">Đăng nhập</a>
             <a href="signup" class="btn">Đăng ký</a>
             <a href="hiring" class="btn">Đăng ký tuyển dụng</a>
         </div>

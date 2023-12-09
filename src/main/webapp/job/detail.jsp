@@ -63,6 +63,16 @@
 <body>
 <% Job job = (Job) request.getAttribute("job");%>
 <div class="container">
+<%--    <nav id="nav" class="bg-white p-4">--%>
+<%--        <div class="header mx-auto flex justify-between items-center">--%>
+<%--            <div class="flex items-center">--%>
+<%--                &lt;%&ndash;            <img src="./assets/images/topcv-logo-6.webp" alt="" class="mr-4 w-[100px]">&ndash;%&gt;--%>
+<%--                <div class="nav-link">--%>
+<%--                    <a href="" class="text-gray-800">Bài lập nhóm Công nghệ Web</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </nav>--%>
     <div class="content p-10">
         <h2 class="title text-2xl text-[#009643] font-bold mb-10">Thông tin công ty</h2>
         <div class="job-inf p-4 rounded-lg bg-[white] mb-6 shadow-sm">
