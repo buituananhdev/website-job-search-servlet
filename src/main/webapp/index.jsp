@@ -268,16 +268,18 @@
     </form>
     <section id="jobs-grid" class="job-container">
         <% for (Job job : filteredJobList) { %>
-        <div class="job-card">
-            <div class="top-infor">
-                <span class="title"><%= job.getTitle() %></span>
-                <span class="company"><%= job.getCompanyId() %></span>
+        <a href=jobs?jobId=<%= job.getJobId()%>>
+            <div class="job-card">
+                <div class="top-infor">
+                    <span class="title"><%= job.getTitle() %></span>
+                    <span class="company"><%= job.getCompanyId() %></span>
+                </div>
+                <div class="bottom-infor">
+                    <span class="salary"><%= job.getSalary() %></span>
+                    <span class="location"><%= job.getLocation() %></span>
+                </div>
             </div>
-            <div class="bottom-infor">
-                <span class="salary"><%= job.getSalary() %></span>
-                <span class="location"><%= job.getLocation() %></span>
-            </div>
-        </div>
+        </a>
         <% } %>
     </section>
 </section>
