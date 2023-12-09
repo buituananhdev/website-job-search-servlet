@@ -5,9 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="com.example.cnw.model.bean.Account" %>
 <%
-    Account currentUser = (Account) session.getAttribute("account");
     String keyword = request.getParameter("keyword");
     String location = request.getParameter("search-location");
     String salary = request.getParameter("search-salary");
@@ -90,29 +88,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 <body class="font-sans bg-gray-100">
-<nav id="nav" class="bg-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="flex items-center">
-<%--            <img src="./assets/images/topcv-logo-6.webp" alt="" class="mr-4 w-[100px]">--%>
-            <div class="nav-link">
-                <a href="" class="text-gray-800">Bài lập nhóm Công nghệ Web</a>
-            </div>
-        </div>
-        <% if (currentUser == null) { %>
-        <div class="flex space-x-4">
-            <a href="auth/login.jsp" class="btn">Đăng nhập</a>
-            <a href="signup" class="btn">Đăng ký</a>
-            <a href="hiring" class="btn">Đăng ký tuyển dụng</a>
-        </div>
-        <% } else { %>
-        <div class="flex space-x-4">
-            <p><%= currentUser.getEmail() %></p>
-            <p><%= currentUser.getRole() %></p>
-        </div>
-        <% } %>
-
-    </div>
-</nav>
+<%@ include file="/components/layouts/header.jsp" %>
 <section id="jobs-area" class="container mx-auto mt-8 pb-100">
     <header>
         <h2 class="text-2xl font-semibold text-gray-800 mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
