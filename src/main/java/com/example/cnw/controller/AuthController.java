@@ -22,12 +22,12 @@ public class AuthController extends HttpServlet {
         HttpSession session = request.getSession();
 
         Account account = accountBO.login(email, password);
-        System.out.println(account);
+
         if (account != null) {
             session.setAttribute("account", account);
             response.sendRedirect("index.jsp");
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("auth/login.jsp");
         }
     }
 }
