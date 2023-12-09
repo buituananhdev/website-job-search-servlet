@@ -1,6 +1,7 @@
 package com.example.cnw.model.bo;
 
 import com.example.cnw.model.bean.Account;
+import com.example.cnw.model.bean.Job;
 import com.example.cnw.model.dao.AccountDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -32,5 +33,10 @@ public class AccountBO {
             return (Account) session.getAttribute("account");
         }
         return null; // No account found in the session
+    }
+
+    public boolean addAccount(String email, String password, String role) {
+        Account account = new Account(email, password, role);
+        return accountDAO.addAccount(account);
     }
 }

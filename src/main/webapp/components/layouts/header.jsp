@@ -17,13 +17,13 @@
                 <% if (currentUser == null) { %>
                 <div class="flex space-x-4">
                     <a href="auth/login.jsp"
-                       class="text-green-700 hover:text-white border border-green-300 hover:bg-green-300 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">Đăng
+                       class="text-green-700 hover:text-white border border-green-300 hover:bg-green-300 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Đăng
                         nhập</a>
                     <a href="auth/signup.jsp"
                        class="text-white bg-green-300 focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Đăng
                         ký</a>
-                    <a type="button"
-                       class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2">Đăng
+                    <a href="auth/signup_company.jsp"
+                       class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">Đăng
                         ký tuyển dụng</a>
                     <button data-collapse-toggle="mobile-menu-2" type="button"
                             class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
