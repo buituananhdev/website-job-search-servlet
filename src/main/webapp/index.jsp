@@ -100,7 +100,7 @@
         </div>
         <% if (currentUser == null) { %>
         <div class="flex space-x-4">
-            <a href="/cnw_war_exploded/auth/login.jsp" class="btn">Đăng nhập</a>
+            <a href="auth/login.jsp" class="btn">Đăng nhập</a>
             <a href="signup" class="btn">Đăng ký</a>
             <a href="hiring" class="btn">Đăng ký tuyển dụng</a>
         </div>
@@ -147,16 +147,18 @@
     </form>
     <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <% for (Job job : filteredJobList) { %>
-        <div class="job-card bg-white shadow-md p-4 rounded">
-            <div class="flex flex-col">
-                <span class="title text-blue-900 font-semibold text-lg mb-2"><%= job.getTitle() %></span>
-                <span class="company text-gray-600"><%= job.getCompanyId() %></span>
+        <a href=jobs?jobId=<%= job.getJobId()%>>
+            <div class="job-card bg-white shadow-md p-4 rounded">
+                <div class="flex flex-col">
+                    <span class="title text-blue-900 font-semibold text-lg mb-2"><%= job.getTitle() %></span>
+                    <span class="company text-gray-600"><%= job.getCompanyId() %></span>
+                </div>
+                <div class="flex items-center mt-2">
+                    <span class="salary bg-gray-100 px-2 py-1 rounded text-gray-700 mr-2"><%= NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(job.getSalary()) %></span>
+                    <span class="location text-gray-700"><%= job.getLocation() %></span>
+                </div>
             </div>
-            <div class="flex items-center mt-2">
-                <span class="salary bg-gray-100 px-2 py-1 rounded text-gray-700 mr-2"><%= NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(job.getSalary()) %></span>
-                <span class="location bg-gray-100 px-2 py-1 rounded text-gray-700 mr-2"><%= job.getLocation() %></span>
-            </div>
-        </div>
+        </a>
         <% } %>
     </section>
     <% if (filteredJobList.size() == 0) { %>
