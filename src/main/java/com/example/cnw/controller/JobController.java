@@ -1,25 +1,50 @@
 package com.example.cnw.controller;
-import java.io.IOException;
-import java.util.List;
 
+import com.example.cnw.model.bean.Job;
+import com.example.cnw.model.dao.JobDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.example.cnw.model.dao.JobDAO;
-import com.example.cnw.model.bean.Job;
+
+import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/jobs")
 public class JobController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        JobDAO jobDAO = new JobDAO();
-        List<Job> jobs = jobDAO.getAllJobs();
+        String jobIdParam = request.getParameter("jobId");
 
-        request.setAttribute("jobList", jobs);
+        if (jobIdParam != null && !jobIdParam.isEmpty()) {
+            // Nếu có param jobId, gọi đến detailJob
+            int jobId = Integer.parseInt(jobIdParam);
+            detailJob(request, response, jobId);
+        } else {
+            JobDAO jobDAO = new JobDAO();
+            List<Job> jobs = jobDAO.getAllJobs();
 
-        RequestDispatcher rd = request.getRequestDispatcher("job/index.jsp");
-        rd.forward(request, response);
+            request.setAttribute("jobList", jobs);
+
+            RequestDispatcher rd = request.getRequestDispatcher("job/index.jsp");
+            rd.forward(request, response);
+        }
     }
+
+    protected void detailJob(HttpServletRequest request, HttpServletResponse response, int jobId)
+            throws ServletException, IOException {
+            JobDAO jobDAO = new JobDAO();
+            Job job = jobDAO.getJobById(jobId);
+
+            if (job != null) {
+                request.setAttribute("job", job);
+
+                RequestDispatcher rd = request.getRequestDispatcher("job/detail.jsp");
+                rd.forward(request, response);
+            } else {
+                response.getWriter().println("Job not found");
+            }
+    }
+
 }
