@@ -7,7 +7,7 @@ public class JobDTO {
     private String requirements;
     private double salary;
     private String location;
-    private int companyName;
+    private String companyName;
 
     // Constructor
     public JobDTO() {
@@ -69,11 +69,11 @@ public class JobDTO {
     }
 
     // Getter and Setter for companyId
-    public int getCompanyName() {
+    public String getCompanyName() {
         return companyName;
     }
 
-    public void setCompanyName(int companyName) {
+    public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
 }
