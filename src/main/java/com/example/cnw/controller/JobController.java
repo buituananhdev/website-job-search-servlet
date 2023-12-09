@@ -2,6 +2,7 @@ package com.example.cnw.controller;
 
 import com.example.cnw.model.bean.Job;
 import com.example.cnw.model.dao.JobDAO;
+import com.example.cnw.model.dto.JobDTO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,7 +24,7 @@ public class JobController extends HttpServlet {
             detailJob(request, response, jobId);
         } else {
             JobDAO jobDAO = new JobDAO();
-            List<Job> jobs = jobDAO.getAllJobs();
+            List<JobDTO> jobs = jobDAO.getAllJobs();
 
             request.setAttribute("jobList", jobs);
 
