@@ -6,74 +6,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.cnw.model.bo.JobBO" %>
 <%@ page import="com.example.cnw.model.bean.Job" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">--%>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <style>
-    .container {
-        background-color: #f4f4f4;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-    }
+    /*.container {*/
+    /*    background-color: #f4f4f4;*/
+    /*    width: 100%;*/
+    /*    height: 100vh;*/
+    /*    overflow: hidden;*/
+    /*}*/
     .content {
         height: 100%;
         padding: 40px;
         max-width: 1000px;
         margin: auto;
     }
-    .title {
-        color: #009643;
-    }
-    .apply-button {
-        background-color: #009643;
-    }
-    .req-title {
-        border-left: 4px solid #009643  ;
-    }
-    .job-inf {
-        background-color: #ffff;
-    }
 </style>
 <body>
-
-</body>
-</html>
-<%@ page import="com.example.cnw.model.bean.Job" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 12/7/2023
-  Time: 8:19 PM
-  To change this template use File | Settings | File Templates.
---%>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Job Detail</title>
-</head>
-<body>
 <% Job job = (Job) request.getAttribute("job");%>
-<div class="container">
-<%--    <nav id="nav" class="bg-white p-4">--%>
-<%--        <div class="header mx-auto flex justify-between items-center">--%>
-<%--            <div class="flex items-center">--%>
-<%--                &lt;%&ndash;            <img src="./assets/images/topcv-logo-6.webp" alt="" class="mr-4 w-[100px]">&ndash;%&gt;--%>
-<%--                <div class="nav-link">--%>
-<%--                    <a href="" class="text-gray-800">Bài lập nhóm Công nghệ Web</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </nav>--%>
-    <div class="content p-10">
+<div class="bg-[#f4f4f4] h-[100vh] w-full overflow-hidden">
+    <div class="h-full p-[40px] max-w-[1000px] m-auto">
         <h2 class="title text-2xl text-[#009643] font-bold mb-10">Thông tin công ty</h2>
         <div class="job-inf p-4 rounded-lg bg-[white] mb-6 shadow-sm">
             <h4 class="text-lg font-semibold pb-4"><%= job.getTitle()%></h4>
@@ -91,11 +49,11 @@
                     <b><%=  job.getLocation()%></b>
                 </div>
             </div>
-            <button class="apply-button w-full bg-[#009643] text-white rounded-md py-1.5 ">Ứng tuyển</button>
+            <a href="/applicants?job_id=<%job.getJobId();%>&candidate_id" class="apply-button w-full bg-[#009643] text-white rounded-md py-1.5 ">Ứng tuyển</a>
         </div>
 
         <div class="job-inf p-4 rounded-lg bg-[white] shadow-sm mb-8">
-            <h4 class="req-title text-lg border-s-4 font-semibold py-2 pl-2 ">  Chi tiết tin tuyển dụng</h4>
+            <h4 class="req-title text-lg border-[#009643] border-s-4 font-semibold py-2 pl-2 ">  Chi tiết tin tuyển dụng</h4>
             <div class="job-inf-description mb-4 pl-4">
                 <b>Mô tả công viêc</b>
                 <p class="pl-4"><%=  job.getDescription()%></p>
@@ -108,24 +66,5 @@
     </div>
 </div>
 
-<%--<table border="1">--%>
-<%--    <thead>--%>
-<%--    <tr>--%>
-<%--        <th>Job ID</th>--%>
-<%--        <th>Title</th>--%>
-<%--        <th>Description</th>--%>
-<%--    </tr>--%>
-<%--    </thead>--%>
-<%--    <tbody>--%>
-<%--    <tr>--%>
-<%--        <td><%= job.getJobId() %></td>--%>
-<%--        <td><%= job.getTitle() %></td>--%>
-<%--        <td><%= job.getDescription() %></td>--%>
-<%--        <td><%= job.getLocation() %></td>--%>
-<%--        <td><%= job.getSalary() %></td>--%>
-<%--        <td><%= job.getRequirements() %></td>--%>
-<%--    </tr>--%>
-<%--    </tbody>--%>
-<%--</table>--%>
 </body>
 </html>

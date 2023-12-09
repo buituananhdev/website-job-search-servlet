@@ -5,6 +5,7 @@ public class Account {
     private String email;
     private String password;
 
+    private String role;
 
     // Constructor
     public Account() {
@@ -44,5 +45,15 @@ public class Account {
     // Setter for password
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // Getter for role
+    public String getRole() {
+        return role;
+    }
+
+    // Setter for role
+    public void setRole(String role) {
+        this.role = role;
     }
 }
