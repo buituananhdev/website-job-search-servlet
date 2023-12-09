@@ -6,66 +6,26 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.cnw.model.bo.JobBO" %>
 <%@ page import="com.example.cnw.model.bean.Job" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.cnw.controller.ApplicantController" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-</head>
-<style>
-    .container {
-        background-color: #f4f4f4;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-    }
-    .content {
-        height: 100%;
-        padding: 40px;
-        max-width: 1000px;
-        margin: auto;
-    }
-    .title {
-        color: #009643;
-    }
-    .apply-button {
-        background-color: #009643;
-    }
-    .req-title {
-        border-left: 4px solid #009643  ;
-    }
-    .job-inf {
-        background-color: #ffff;
-    }
-</style>
-<body>
-
-</body>
-</html>
-<%@ page import="com.example.cnw.model.bean.Job" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 12/7/2023
-  Time: 8:19 PM
-  To change this template use File | Settings | File Templates.
---%>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Job Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .job-inf {
+            box-shadow:0px 0px 11px 0px #e2e2e2;
+        }
+    </style>
 </head>
 <body>
+<%@ include file="../components/layouts/header.jsp" %>
 <% Job job = (Job) request.getAttribute("job");%>
-<div class="container">
-    <div class="content p-10">
-        <h2 class="title text-2xl text-[#009643] font-bold mb-10">Thông tin công ty</h2>
-        <div class="job-inf p-4 rounded-lg bg-[white] mb-6 shadow-sm">
+<div class="bg-[#f4f4f4] p-[40px] mt-40px rounded-lg h-[100vh] w-full overflow-hidden h-fit ">
+    <div class="h-full p-[40px] max-w-[1000px] m-auto mt-40px rounded-2xl h-[100vh] bg-white overflow-hidden h-fit ">
+        <h2 class="title text-2xl w-full text-[#009643] font-bold mb-12">Thông tin công ty</h2>
+        <form method="POST" action="applicants?job_id=<%= job.getJobId()%>" class="job-inf p-8 rounded-lg bg-[white] w-full mb-10">
             <h4 class="text-lg font-semibold pb-4"><%= job.getTitle()%></h4>
             <div class="job-content flex gap-5 mb-2">
                 <b>Công ty:</b>
@@ -81,11 +41,14 @@
                     <b><%=  job.getLocation()%></b>
                 </div>
             </div>
-            <button class="apply-button w-full bg-[#009643] text-white rounded-md py-1.5 ">Ứng tuyển</button>
-        </div>
-
-        <div class="job-inf p-4 rounded-lg bg-[white] shadow-sm mb-8">
-            <h4 class="req-title text-lg border-s-4 font-semibold py-2 pl-2 ">  Chi tiết tin tuyển dụng</h4>
+            <input type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm
+                font-bold bg-[#009643] leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4
+                focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4
+                md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white"
+            value="Ứng tuyển"/>
+        </form>
+        <div class="job-inf p-8 rounded-lg bg-[white] mb-8">
+            <h4 class="req-title text-lg border-[#009643] border-s-4 font-semibold py-2 pl-2 ">  Chi tiết tin tuyển dụng</h4>
             <div class="job-inf-description mb-4 pl-4">
                 <b>Mô tả công viêc</b>
                 <p class="pl-4"><%=  job.getDescription()%></p>
@@ -98,24 +61,5 @@
     </div>
 </div>
 
-<%--<table border="1">--%>
-<%--    <thead>--%>
-<%--    <tr>--%>
-<%--        <th>Job ID</th>--%>
-<%--        <th>Title</th>--%>
-<%--        <th>Description</th>--%>
-<%--    </tr>--%>
-<%--    </thead>--%>
-<%--    <tbody>--%>
-<%--    <tr>--%>
-<%--        <td><%= job.getJobId() %></td>--%>
-<%--        <td><%= job.getTitle() %></td>--%>
-<%--        <td><%= job.getDescription() %></td>--%>
-<%--        <td><%= job.getLocation() %></td>--%>
-<%--        <td><%= job.getSalary() %></td>--%>
-<%--        <td><%= job.getRequirements() %></td>--%>
-<%--    </tr>--%>
-<%--    </tbody>--%>
-<%--</table>--%>
 </body>
 </html>

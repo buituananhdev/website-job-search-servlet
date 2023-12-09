@@ -25,7 +25,9 @@ public class AccountBO {
             session.invalidate();
         }
     }
-
+    public int getCandidateId(int accountId) {
+        return accountDAO.getIdCandidate(accountId);
+    }
     public Account getAccountDetail(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
