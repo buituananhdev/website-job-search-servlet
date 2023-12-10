@@ -1,7 +1,9 @@
 <%@ page import="com.example.cnw.model.bean.Account" %>
+<%@ page import="com.example.cnw.model.dao.AccountDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Account currentUser = (Account) session.getAttribute("account");
+    AccountDAO accountDAO = new AccountDAO();
 %>
 <html>
 <head>
@@ -56,10 +58,10 @@
                     <% if (currentUser != null) { %>
                     <% if (currentUser.getRole().equals("candidate")) { %>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Trang chủ</a>
+                        <a href="index.jsp" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Trang chủ</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Việc làm của tôi</a>
+                        <a href="applicants?candidate_id=<%= accountDAO.getIdCandidate(currentUser.getAccountId())%>" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0">Việc làm của tôi</a>
                     </li>
                     <% } else { %>
                     <li>

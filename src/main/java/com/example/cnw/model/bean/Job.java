@@ -14,6 +14,15 @@ public class Job {
         // Default constructor
     }
 
+    public Job(String title, String description, String requirements, double salary, String location, int companyId) {
+        this.title = title;
+        this.description = description;
+        this.requirements = requirements;
+        this.salary = salary;
+        this.location = location;
+        this.companyId = companyId;
+    }
+
     // Getter and Setter for jobId
     public int getJobId() {
         return jobId;
