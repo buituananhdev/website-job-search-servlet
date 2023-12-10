@@ -12,8 +12,8 @@ public class ApplicantBO {
         this.ApplicantDAO = new ApplicantDAO();
     }
 
-    public List<Applicant> getApplicantsByCandidateId(int candidateId) {
-        return ApplicantDAO.getApplicantsByCandidateId(candidateId);
+    public List<Applicant> getApplicants(int candidateId, int jobId) {
+        return ApplicantDAO.getApplicants(candidateId, jobId);
     }
 
     public void addApplicant(Applicant applicant) {

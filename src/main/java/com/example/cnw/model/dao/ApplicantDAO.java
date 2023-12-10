@@ -11,15 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicantDAO {
-    private final String GET_APPLICANTS_BY_ID_CANDIDATE = "SELECT * FROM Applicants WHERE candidate_id=?";
+    private final String GET_APPLICANTS = "SELECT * FROM Applicants ";
     private final String ADD_APPLICANT = "INSERT INTO Applicants (candidate_id, job_id) VALUES (?, ?)";
     private final String CHECK_APPLICANT_QUERY = "SELECT COUNT(*) AS count FROM Applicants WHERE job_id = ? AND candidate_id = ?";
 
-    public List<Applicant> getApplicantsByCandidateId(int candidate_id) {
+    public List<Applicant> getApplicants(int candidate_id, int company_id) {
         List<Applicant> applicantList = new ArrayList<>();
+        String sqlQuery = GET_APPLICANTS;
+        int paramValue = 0;
+        if(candidate_id > 0) {
+            sqlQuery += "WHERE candidate_id = ?";
+            paramValue = candidate_id;
+        } else if (company_id > 0) {
+            sqlQuery += "WHERE job_id = ?";
+            paramValue = company_id;
+        }
         try (Connection connection = DButils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_APPLICANTS_BY_ID_CANDIDATE)) {
-            preparedStatement.setInt(1, candidate_id);
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, paramValue);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Applicant applicant = new Applicant();

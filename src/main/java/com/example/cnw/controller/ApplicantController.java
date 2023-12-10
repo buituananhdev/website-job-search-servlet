@@ -21,8 +21,16 @@ public class ApplicantController extends HttpServlet {
     ApplicantBO ApplicantBO = new ApplicantBO();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int candidate_id = Integer.parseInt(request.getParameter("candidate_id"));
-        List<Applicant> applicants = ApplicantBO.getApplicantsByCandidateId(candidate_id);
+        String candidateIdParam = request.getParameter("candidate_id");
+        String jobIdParam = request.getParameter("job_id");
+        List<Applicant> applicants = null;
+        if ( candidateIdParam !=null && !candidateIdParam.isEmpty()) {
+            int candidate_id = Integer.parseInt(candidateIdParam);
+            applicants = ApplicantBO.getApplicants(candidate_id, 0);
+        } else if( jobIdParam !=null && !jobIdParam.isEmpty()) {
+            int job_id = Integer.parseInt(jobIdParam);
+            applicants = ApplicantBO.getApplicants(0, job_id);
+        }
         request.setAttribute("applicants", applicants);
         RequestDispatcher rd = request.getRequestDispatcher("applicant/index.jsp");
         rd.forward(request, response);
@@ -39,7 +47,7 @@ public class ApplicantController extends HttpServlet {
 
             Applicant newApplicant = new Applicant(candidateId, jobId);
             ApplicantBO.addApplicant(newApplicant);
-            List<Applicant> applicants = ApplicantBO.getApplicantsByCandidateId(newApplicant.getCandidate_id());
+            List<Applicant> applicants = ApplicantBO.getApplicants(newApplicant.getCandidate_id(), 0);
             request.setAttribute("applicants", applicants);
             RequestDispatcher rd = request.getRequestDispatcher("applicant/index.jsp");
             rd.forward(request, response);
