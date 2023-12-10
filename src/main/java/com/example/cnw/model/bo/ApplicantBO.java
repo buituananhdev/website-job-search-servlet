@@ -12,13 +12,13 @@ public class ApplicantBO {
         this.ApplicantDAO = new ApplicantDAO();
     }
 
-    public List<Applicant> getApplicantsByCandidateId(int candidateId) {
-        return ApplicantDAO.getApplicantsByCandidateId(candidateId);
+    public List<Applicant> getApplicants(int candidateId, int jobId) {
+        return ApplicantDAO.getApplicants(candidateId, jobId);
     }
+
     public void addApplicant(Applicant applicant) {
         ApplicantDAO.addApplication(applicant);
     }
-    public void deleteApplicant(int applicantId) {
-        ApplicantDAO.deleteApplication(applicantId);
-    }
+
+    public boolean isApplicantExist(int jobId, int candidateId) { return ApplicantDAO.isApplicantExists(jobId, candidateId); }
 }

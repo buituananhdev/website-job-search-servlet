@@ -1,7 +1,9 @@
 <%@ page import="com.example.cnw.model.bean.Account" %>
+<%@ page import="com.example.cnw.model.dao.AccountDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Account currentUser = (Account) session.getAttribute("account");
+    AccountDAO accountDAO = new AccountDAO();
 %>
 <html>
 <head>
