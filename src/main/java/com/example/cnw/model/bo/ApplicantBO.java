@@ -15,10 +15,10 @@ public class ApplicantBO {
     public List<Applicant> getApplicantsByCandidateId(int candidateId) {
         return ApplicantDAO.getApplicantsByCandidateId(candidateId);
     }
+
     public void addApplicant(Applicant applicant) {
         ApplicantDAO.addApplication(applicant);
     }
-    public void deleteApplicant(int applicantId) {
-        ApplicantDAO.deleteApplication(applicantId);
-    }
+
+    public boolean isApplicantExist(int jobId, int candidateId) { return ApplicantDAO.isApplicantExists(jobId, candidateId); }
 }

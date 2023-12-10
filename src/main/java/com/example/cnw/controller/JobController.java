@@ -1,6 +1,7 @@
 package com.example.cnw.controller;
 
 import com.example.cnw.model.bean.Job;
+import com.example.cnw.model.bo.JobBO;
 import com.example.cnw.model.dao.JobDAO;
 import com.example.cnw.model.dto.JobDTO;
 import jakarta.servlet.RequestDispatcher;
@@ -35,8 +36,8 @@ public class JobController extends HttpServlet {
 
     protected void detailJob(HttpServletRequest request, HttpServletResponse response, int jobId)
             throws ServletException, IOException {
-            JobDAO jobDAO = new JobDAO();
-            Job job = jobDAO.getJobById(jobId);
+            JobBO jobBO = new JobBO();
+            Job job = jobBO.getJobById(jobId);
 
             if (job != null) {
                 request.setAttribute("job", job);

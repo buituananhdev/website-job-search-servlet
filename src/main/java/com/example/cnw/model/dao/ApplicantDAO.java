@@ -13,7 +13,7 @@ import java.util.List;
 public class ApplicantDAO {
     private final String GET_APPLICANTS_BY_ID_CANDIDATE = "SELECT * FROM Applicants WHERE candidate_id=?";
     private final String ADD_APPLICANT = "INSERT INTO Applicants (candidate_id, job_id) VALUES (?, ?)";
-    private final String DELETE_APPLICANT = "DELETE FROM Applicants WHERE applicant_id=?";
+    private final String CHECK_APPLICANT_QUERY = "SELECT COUNT(*) AS count FROM Applicants WHERE job_id = ? AND candidate_id = ?";
 
     public List<Applicant> getApplicantsByCandidateId(int candidate_id) {
         List<Applicant> applicantList = new ArrayList<>();
@@ -46,13 +46,21 @@ public class ApplicantDAO {
         }
     }
 
-    public void deleteApplication(int applicantId) {
+    public boolean isApplicantExists(int jobId, int candidateId) {
         try (Connection connection = DButils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_APPLICANT)) {
-            preparedStatement.setInt(1, applicantId);
-            preparedStatement.executeUpdate();
+             PreparedStatement preparedStatement = connection.prepareStatement(CHECK_APPLICANT_QUERY)) {
+            preparedStatement.setInt(1, jobId);
+            preparedStatement.setInt(2, candidateId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0;
+                }
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Xử lý lỗi nếu cần
         }
+        return false;
     }
 }
