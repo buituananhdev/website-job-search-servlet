@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class AccountDAO {
     private final String GET_USER = "SELECT * FROM Accounts WHERE email = ? AND password = ?";
-    private final String GET_ID_CANDIDATE = "SELECT * FROM Candidates WHERE account_id = ?";
+    private final String GET_ID_CANDIDATE = "SELECT candidate_id FROM Candidates WHERE account_id = ?";
 
     public Account isValidUser(String email, String password) {
         Account account = null;
@@ -40,7 +40,7 @@ public class AccountDAO {
             preparedStatement.setInt(1, accountId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    candidateId = resultSet.getInt("candidate_id");
+                    candidateId = resultSet.getInt(1);
                 }
             }
         } catch (SQLException e) {
