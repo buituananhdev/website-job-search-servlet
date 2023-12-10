@@ -15,6 +15,7 @@ public class AccountDAO {
     private final String ADD_ACCOUNT = "INSERT INTO Accounts (email, password, role) VALUES (?, ?, ?)";
 
     private final String GET_ID_CANDIDATE = "SELECT candidate_id FROM Candidates WHERE account_id = ?";
+    private final String GET_ID_COMPANY= "SELECT company_id FROM companies WHERE account_id = ?";
 
     public Account isValidUser(String email, String password) {
         Account account = null;
@@ -65,5 +66,21 @@ public class AccountDAO {
             e.printStackTrace();
         }
         return candidateId;
+    }
+
+    public int getIdCompany(int accountId) {
+        int companyId = 0;
+        try (Connection connection = DButils.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ID_COMPANY)) {
+            preparedStatement.setInt(1, accountId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    companyId = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return companyId;
     }
 }
