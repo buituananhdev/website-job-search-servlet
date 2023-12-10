@@ -90,10 +90,10 @@
 </head>
 <body class="font-sans bg-gray-100">
 <%@ include file="/components/layouts/header.jsp" %>
-<section id="jobs-area" class="container mx-auto mt-8 pb-100">
+<section id="jobs-area" class="container mx-auto mt-8 pb-100 flex flex-col items-center">
     <header>
         <h2 class="text-3xl font-semibold text-[#009643] mb-2">Tìm việc làm nhanh 24h, việc làm mới nhất trên toàn quốc.</h2>
-        <p class="text-gray-600">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
+        <p class="text-gray-600 text-center">Tiếp cận 40,000+ tin tuyển dụng việc làm mỗi ngày từ hàng nghìn doanh nghiệp uy tín tại Việt Nam</p>
     </header>
     <form class="flex space-x-4 my-4" method="get" action="<%= request.getRequestURI() %>">
         <div class="h-full relative flex items-center rounded-lg">
@@ -122,7 +122,7 @@
         </div>
         <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1 text-white">Tìm kiếm</button>
     </form>
-    <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4" style="padding-bottom: 100px">
+    <section id="jobs-grid" class="grid grid-cols-1 md:grid-cols-4 gap-4" style="padding-bottom: 100px">
         <% for (JobDTO job : filteredJobList) { %>
         <a href=jobs?jobId=<%= job.getJobId()%>>
             <div class="job-card bg-white shadow-md p-4 rounded">
@@ -140,7 +140,7 @@
     </section>
     <% if (filteredJobList.size() == 0) { %>
         <div class="w-full h-full flex justify-center items-center">
-            <img class="" src="assets/icons/not-found.svg">
+            <img class="w-[400px]" src="assets/icons/not-found.svg">
         </div>
     <% } %>
 </section>

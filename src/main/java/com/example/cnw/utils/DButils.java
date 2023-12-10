@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DButils {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/JobSearchWeb";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/jobSearchWeb";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "123456Aa";
 
     static {
         try {
