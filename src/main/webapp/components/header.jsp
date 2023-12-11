@@ -59,12 +59,13 @@
                         <div id="myDropdown" class="dropdown-content hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                             <div class="py-1" role="none">
                                 <% if (currentUser.getRole().equals("candidate")) { %>
-                                    <a href="../index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Trang chủ</a>
-                                    <a href="../applicant/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển của tôi</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Trang chủ</a>
+                                    <a href="${pageContext.request.contextPath}/applicant/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển của tôi</a>
                                 <% } else { %>
                                     <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tin tuyển dụng của tôi</a>
+                                    <a href="${pageContext.request.contextPath}/jobs/addPost.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tạo tin tuyển dụng</a>
                                 <% } %>
-                                <form action="auth" method="post">
+                                <form action="${pageContext.request.contextPath}/auth" method="post">
                                     <input type="hidden" name="formType" value="logout">
                                     <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
                                 </form>
