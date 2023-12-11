@@ -89,7 +89,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="font-sans bg-gray-100">
-<%@ include file="/components/layouts/header.jsp" %>
+<%@ include file="/components/header.jsp" %>
 <section id="jobs-area" class="container mx-auto mt-8 pb-100 flex flex-col items-center">
     <a href="./job/addPost.jsp">Thêm bài tuyển dụng </a>
     <header>

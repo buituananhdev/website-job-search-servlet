@@ -60,12 +60,12 @@
                             <div class="py-1" role="none">
                                 <% if (currentUser.getRole().equals("candidate")) { %>
                                     <a href="../index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Trang chủ</a>
-                                    <a href="../applicant/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển tôi</a>
+                                    <a href="../applicant/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển của tôi</a>
                                 <% } else { %>
                                     <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tin tuyển dụng của tôi</a>
                                 <% } %>
-                                <form method="POST" action="../auth" role="none">
-                                    <input type="hidden" name="formType" value="signout">
+                                <form action="auth" method="post">
+                                    <input type="hidden" name="formType" value="logout">
                                     <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
                                 </form>
                             </div>

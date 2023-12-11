@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<%@ include file="../components/layouts/header.jsp" %>
+<%@ include file="../components/header.jsp" %>
 <% Job job = (Job) request.getAttribute("job");%>
 <div class="bg-[#f4f4f4] p-[40px] mt-40px rounded-lg h-[100vh] w-full overflow-hidden h-fit ">
     <div class="h-full p-[40px] max-w-[1000px] m-auto mt-40px rounded-2xl h-[100vh] bg-white overflow-hidden h-fit ">
