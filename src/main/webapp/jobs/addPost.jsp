@@ -81,7 +81,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<%@ include file="../components/layouts/header.jsp" %>
+<%@ include file="../components/header.jsp" %>
 <div class="post-container bg-[#f4f4f4f4]">
     <div class="max-w-[1000px] m-auto pt-10" 1000px="">
         <h4 class="text-xl font-bold">Thông tin đăng tuyển</h4>

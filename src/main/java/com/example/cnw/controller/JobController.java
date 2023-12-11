@@ -63,7 +63,7 @@ public class JobController extends HttpServlet {
             if (job != null) {
                 request.setAttribute("job", job);
 
-                RequestDispatcher rd = request.getRequestDispatcher("job/detail.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/jobs/detail.jsp");
                 rd.forward(request, response);
             } else {
                 response.getWriter().println("Job not found");

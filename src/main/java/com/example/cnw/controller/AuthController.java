@@ -33,6 +33,10 @@ public class AuthController extends HttpServlet {
                     response.sendRedirect("auth/login.jsp");
                 }
                 break;
+            case "logout":
+                session.invalidate();
+                response.sendRedirect("auth/login.jsp");
+                break;
             case "signup_candidate":
                 boolean isSuccess = accountBO.addAccount(email, password, "candidate");
                 if (isSuccess) {
