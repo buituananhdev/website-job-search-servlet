@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.cnw.model.bean.Job" %><%--
   Created by IntelliJ IDEA.
   User: PC
   Date: 12/10/2023
@@ -81,11 +82,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<%@ include file="../components/header.jsp" %>
+<%@ include file="../components/header.jsp"%>
+<% Job job = (Job) request.getAttribute("job");%>
 <div class="post-container bg-[#f4f4f4f4]">
     <div class="max-w-[1000px] m-auto pt-10" 1000px="">
-        <h4 class="text-xl font-bold">Thông tin đăng tuyển</h4>
-        <form action="../jobs" method="POST" class="list-items p-[40px] flex flex-col gap-6">
+        <% if(job != null) { %>
+            <h4 class="text-xl font-bold">Thông tin bài đăng</h4>
+            <form action="jobs" method="POST" class="list-items p-[40px] flex flex-col gap-6">
+        <%} else {%>
+            <h4 class="text-xl font-bold">Thông tin đăng tuyển</h4>
+            <form action="../jobs" method="POST" class="list-items p-[40px] flex flex-col gap-6">
+            <%}%>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
                     <div class="p-2 rounded-full bg-[#f4f4f4]">
@@ -93,7 +100,8 @@
                     </div>
                     <p class="req-item-title">Tiêu đề thông tin tuyển dụng</p>
                 </div>
-                <input class="p-2 border-b focus:outline-none" required="" type="text" placeholder="Nhập thông tin tuyển dụng" name="title" id="title">
+                <input type="text" name="jobId" value="<%= (job != null) ? job.getJobId() : "" %>" hidden="">
+                <input class="p-2 border-b focus:outline-none" required="" type="text" placeholder="Nhập thông tin tuyển dụng" name="title" id="title" value="<%= (job != null) ? job.getTitle() : "" %>">
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -102,7 +110,7 @@
                     </div>
                     <p>Mức lương</p>
                 </div>
-                <input class="p-2 border-b focus:outline-none" required="" type="number" name="salary" placeholder="Nhập mức lương" id="salary">
+                <input class="p-2 border-b focus:outline-none" required="" type="number" name="salary" placeholder="Nhập mức lương" id="salary" value="<%= (job != null) ? job.getSalary() : "" %>">
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -112,9 +120,9 @@
                     <p>Địa điểm cần tuyển dụng:</p>
                 </div>
                 <select name="location" id="location" required="" class="w-full h-full border rounded p-4 rounded-lg">
-                    <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Toàn quốc</option>
+                    <option value="all" <%=(location == null || "all".equals(location) ? "selected" : "")%>>Toàn quốc</option>
                     <% for (String city : cityList) { %>
-                    <option value="<%= city %>" <%=(location != null && city.equals(location)) ? "selected" : ""%>> <%= city %></option>
+                    <option value="<%= city %>" <%=(city.equals((job != null) ? job.getLocation() : location )) ? "selected" : ""%>> <%= city %></option>
                     <% } %>
                 </select>
             </div>
@@ -125,7 +133,7 @@
                     </div>
                     <p>Mô tả công việc</p>
                 </div>
-                <textarea class="border rounded-lg h-[100px]" required="" name="description" id="description" cols="30" rows="10"></textarea>
+                <textarea class="border rounded-lg h-[100px]" required="" name="description" id="description" cols="30" rows="10"><%= (job != null) ? job.getDescription() : "" %></textarea>
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -134,9 +142,13 @@
                     </div>
                     <p>Yêu cầu công việc</p>
                 </div>
-                <textarea class="border rounded-lg h-[100px]" required="" name="requirement" id="requirement" cols="30" rows="10"></textarea>
+                <textarea class="border rounded-lg h-[100px]" required="" name="requirement" id="requirement" cols="30" rows="10"><%= (job != null) ? job.getRequirements() : "" %></textarea>
             </div>
+            <% if(job != null) { %>
+                <input type="submit" class="py-2 mb-8 w-full bg-[#00b14f] rounded-lg text-white" value="Cập nhật bài tuyển dụng">
+            <%} else {%>
             <input type="submit" class="py-2 mb-8 w-full bg-[#00b14f] rounded-lg text-white" value="Đăng bài tuyển dụng">
+            <%}%>
         </form>
     </div>
 </div>

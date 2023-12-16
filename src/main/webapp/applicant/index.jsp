@@ -26,6 +26,9 @@
             <%} else {%>
                 <h2 class="title text-2xl w-full text-[#009643] font-bold mb-12">Công việc đã tạo</h2>
             <%}%>
+            <% if( applicantList.isEmpty()) { %>
+                <div>Chưa có đơn đăng kí</div>
+            <%} else {%>
             <div class="list-job overflow-auto h-[650px] p-[20px]">
                 <% for (Applicant applicant : applicantList) {
                     JobBO jobBO = new JobBO();
@@ -67,9 +70,9 @@
                     <hr>
                     <div class="text-[#6f7882]">Trạng thái:  <span class="text-[#3b78dc]">Đã ứng tuyển</span></div>
                 </div>
-                <% } %>
+                <% }
+                }%>
             </div>
-
         </div>
     </div>
 </div>
