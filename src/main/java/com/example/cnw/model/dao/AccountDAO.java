@@ -38,17 +38,28 @@ public class AccountDAO {
         return account;
     }
 
-    public boolean addAccount(Account account) {
+    public Account addAccount(Account account) {
         try (Connection connection = DButils.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ACCOUNT)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_ACCOUNT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
             preparedStatement.setString(1, account.getEmail());
             preparedStatement.setString(2, account.getPassword());
             preparedStatement.setString(3, account.getRole());
             preparedStatement.executeUpdate();
-            return true;
+
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int accountId = generatedKeys.getInt(1);
+
+                account.setAccountId(accountId);
+
+                return account;
+            } else {
+                throw new SQLException("Failed to retrieve generated keys, account not added.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
