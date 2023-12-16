@@ -1,9 +1,10 @@
 <%@ page import="com.example.cnw.model.bean.Account" %>
 <%@ page import="com.example.cnw.model.dao.AccountDAO" %>
+<%@ page import="com.example.cnw.model.bo.AccountBO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Account currentUser = (Account) session.getAttribute("account");
-    AccountDAO accountDAO = new AccountDAO();
+    AccountBO accountBO = new AccountBO();
 %>
 <html>
 <head>
@@ -60,9 +61,9 @@
                             <div class="py-1" role="none">
                                 <% if (currentUser.getRole().equals("candidate")) { %>
                                     <a href="${pageContext.request.contextPath}/index.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Trang chủ</a>
-                                    <a href="${pageContext.request.contextPath}/applicants?candidate_id=<%= accountDAO.getIdCandidate(currentUser.getAccountId())%>" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển của tôi</a>
+                                    <a href="${pageContext.request.contextPath}/applicants?candidate_id=<%= accountBO.getCandidateId(currentUser.getAccountId())%>" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Đơn ứng tuyển của tôi</a>
                                 <% } else { %>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tin tuyển dụng của tôi</a>
+                                    <a href="${pageContext.request.contextPath}/jobs?companyId=<%= accountBO.getCompanyId(currentUser.getAccountId()) %>" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tin tuyển dụng của tôi</a>
                                     <a href="${pageContext.request.contextPath}/jobs/addPost.jsp" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-0">Tạo tin tuyển dụng</a>
                                 <% } %>
                                 <form action="${pageContext.request.contextPath}/auth" method="post">
