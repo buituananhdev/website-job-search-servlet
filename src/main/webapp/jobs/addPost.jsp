@@ -93,7 +93,7 @@
                     </div>
                     <p class="req-item-title">Tiêu đề thông tin tuyển dụng</p>
                 </div>
-                <input class="p-2 border-b focus:outline-none" type="text" placeholder="Nhập thông tin tuyển dụng" name="title" id="title">
+                <input class="p-2 border-b focus:outline-none" required="" type="text" placeholder="Nhập thông tin tuyển dụng" name="title" id="title">
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -102,7 +102,7 @@
                     </div>
                     <p>Mức lương</p>
                 </div>
-                <input class="p-2 border-b focus:outline-none" type="number" name="salary" placeholder="Nhập mức lương" id="salary">
+                <input class="p-2 border-b focus:outline-none" required="" type="number" name="salary" placeholder="Nhập mức lương" id="salary">
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -111,7 +111,7 @@
                     </div>
                     <p>Địa điểm cần tuyển dụng:</p>
                 </div>
-                <select name="location" id="location" class="w-full h-full border rounded p-4 rounded-lg">
+                <select name="location" id="location" required="" class="w-full h-full border rounded p-4 rounded-lg">
                     <option value="all" <%=(location == null || "all".equals(location)) ? "selected" : ""%>>Toàn quốc</option>
                     <% for (String city : cityList) { %>
                     <option value="<%= city %>" <%=(location != null && city.equals(location)) ? "selected" : ""%>> <%= city %></option>
@@ -125,7 +125,7 @@
                     </div>
                     <p>Mô tả công việc</p>
                 </div>
-                <textarea class="border rounded-lg h-[100px]" name="description" id="description" cols="30" rows="10"></textarea>
+                <textarea class="border rounded-lg h-[100px]" required="" name="description" id="description" cols="30" rows="10"></textarea>
             </div>
             <div class="req-item w-full flex flex-col gap-[16px] p-[20px] bg-white rounded-lg">
                 <div class="flex gap-2 items-center">
@@ -134,7 +134,7 @@
                     </div>
                     <p>Yêu cầu công việc</p>
                 </div>
-                <textarea class="border rounded-lg h-[100px]" name="requirement" id="requirement" cols="30" rows="10"></textarea>
+                <textarea class="border rounded-lg h-[100px]" required="" name="requirement" id="requirement" cols="30" rows="10"></textarea>
             </div>
             <input type="submit" class="py-2 mb-8 w-full bg-[#00b14f] rounded-lg text-white" value="Đăng bài tuyển dụng">
         </form>
