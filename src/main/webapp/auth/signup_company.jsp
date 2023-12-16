@@ -80,6 +80,10 @@
 <body>
 <section class="bg-gray-50 p-[50px]">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="${pageContext.request.contextPath}/index.jsp" class="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+            <img class="w-8 h-8 mr-2" src="../assets/images/logo.png" alt="logo">
+            CNW
+        </a>
         <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
@@ -95,6 +99,10 @@
                         <textarea type="text" name="description" id="description" placeholder="Your description" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required=""></textarea>
                     </div>
                     <div>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Your phone <span class="text-red-700">*</span></label>
+                        <input type="tel" name="phone" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Your Phone Number" required="">
+                    </div>
+                    <div>
                         <label for="location" class="block mb-2 text-sm font-medium text-gray-900">Location <span class="text-red-700">*</span></label>
                         <select name="location" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                             <% for (String city : cityList) { %>
@@ -103,12 +111,12 @@
                         </select>
                     </div>
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email <span class="text-red-700">*</span></label>
-                        <input type="email" name="confirm_password" id="email" placeholder="avepoint.vietnam@avepoint.com" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email <span class="text-red-700">*</span></label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="name@company.com" required="">
                     </div>
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password <span class="text-red-700">*</span></label>
-                        <input type="password" name="confirm_password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
                     </div>
                     <div>
                         <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm Password <span class="text-red-700">*</span></label>

@@ -6,17 +6,17 @@ public class Candidate {
     private String email;
     private String phone;
     private String password;
-
+    private int accountId;
     // Constructor
     public Candidate() {
         // Default constructor
     }
-    public Candidate(int candidateId, String name, String email, String phone, String password) {
-        this.candidateId = candidateId;
+    public Candidate(String name, String email, String phone, String password, int accountId) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.accountId = accountId;
     }
 
     // Getter methods
@@ -39,6 +39,9 @@ public class Candidate {
     public String getPassword() {
         return password;
     }
+    public int getAccountId() {
+        return accountId;
+    }
 
     // Setter methods
     public void setCandidateId(int candidateId) {
@@ -60,4 +63,9 @@ public class Candidate {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setAccountId(int accountID) {
+        this.accountId = accountID;
+    }
+
 }
