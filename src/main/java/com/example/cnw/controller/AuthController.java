@@ -21,6 +21,8 @@ public class AuthController extends HttpServlet {
         String formType = request.getParameter("formType");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
         HttpSession session = request.getSession();
 
         switch (formType){
@@ -38,12 +40,24 @@ public class AuthController extends HttpServlet {
                 response.sendRedirect("auth/login.jsp");
                 break;
             case "signup_candidate":
-                boolean isSuccess = accountBO.addAccount(email, password, "candidate");
-                if (isSuccess) {
+                boolean signUpCandidateSuccess = accountBO.addAccountCandidate(email, password, name, phone);
+                if (signUpCandidateSuccess) {
                     response.sendRedirect("auth/login.jsp");
                 } else {
                     request.setAttribute("isFail", "fail");
                     RequestDispatcher dispatcher = request.getRequestDispatcher("auth/signup.jsp");
+                    dispatcher.forward(request, response);
+                }
+                break;
+            case "signup_company":
+                String location = request.getParameter("location");
+                String description = request.getParameter("description");
+                boolean signUpCopanySuccess = accountBO.addAccountCompany(email, password, name, description, location);
+                if (signUpCopanySuccess) {
+                    response.sendRedirect("auth/login.jsp");
+                } else {
+                    request.setAttribute("isFail", "fail");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("auth/signup_company.jsp");
                     dispatcher.forward(request, response);
                 }
                 break;

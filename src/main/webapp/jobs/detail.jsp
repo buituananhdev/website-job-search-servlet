@@ -67,7 +67,6 @@
                     </div>
                 </div>
             </div>
-
                 <% if(currentUser == null ) { %>
                 <a href="auth/login.jsp" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm
                     font-bold bg-[#009634] leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4

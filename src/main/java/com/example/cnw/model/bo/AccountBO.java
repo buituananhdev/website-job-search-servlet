@@ -1,6 +1,8 @@
 package com.example.cnw.model.bo;
 
 import com.example.cnw.model.bean.Account;
+import com.example.cnw.model.bean.Candidate;
+import com.example.cnw.model.bean.Company;
 import com.example.cnw.model.bean.Job;
 import com.example.cnw.model.dao.AccountDAO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,8 +45,21 @@ public class AccountBO {
         return null; // No account found in the session
     }
 
-    public boolean addAccount(String email, String password, String role) {
-        Account account = new Account(email, password, role);
-        return accountDAO.addAccount(account);
+    public boolean addAccountCompany(String email, String password, String name, String description, String location) {
+        Account account = new Account(email, password, "company");
+        Account newAccount =  accountDAO.addAccount(account);
+        Company company = new Company(name, description, location, newAccount.getAccountId());
+        CompanyBO companyBO = new CompanyBO();
+        companyBO.addCompany(company);
+        return newAccount != null;
+    }
+
+    public boolean addAccountCandidate(String email, String password, String name, String phone) {
+        Account account = new Account(email, password, "candidate");
+        Account newAccount =  accountDAO.addAccount(account);
+        Candidate candidate = new Candidate(name, email, phone, password, newAccount.getAccountId());
+        CandidateBO candidateBO = new CandidateBO();
+        candidateBO.addCandidate(candidate);
+        return newAccount != null;
     }
 }
