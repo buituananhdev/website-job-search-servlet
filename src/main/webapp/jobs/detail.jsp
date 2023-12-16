@@ -79,7 +79,8 @@
                     <div class="button-applied flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm
                         font-bold bg-white leading-6 capitalize duration-100 transform rounded-lg cursor-pointer sm:mb-0 sm:w-auto sm:mr-4
                         md:pl-8 md:pr-6 xl:pl-12 xl:pr-10 text-[#009634]">Đã ứng tuyển</div>
-                    <%} else if(currentUser.getRole() == "candidate") {%>
+                    <%currentUser.getRole();%>
+                    <%} else if(currentUser.getRole().equals("candidate"))  {%>
                     <button type="submit" class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm
                         font-bold bg-[#009643] leading-6 capitalize duration-100 transform rounded-lg shadow cursor-pointer focus:ring-4
                         focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4

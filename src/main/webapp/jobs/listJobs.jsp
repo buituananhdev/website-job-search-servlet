@@ -62,7 +62,23 @@
             </div>
           </div>
           <hr>
-          <div class="text-[#6f7882]">Trạng thái:  <span class="text-[#3b78dc]">Đã ứng tuyển</span></div>
+          <div class="flex justify-between items-center">
+            <a href="jobs?jobId=<%= job.getJobId()%>" class="text-[#3b78dc]"
+            >View</a
+            >
+            <div class="flex gap-5">
+              <form action="jobs" method="post">
+                <input type="text" name="delete" value="1" id="delete" hidden>
+                <input type="text" name="jobId" value="<%= job.getJobId()%>" id="jobId" hidden>
+                <input class="w-[100px] text-center py-1 rounded-lg border" type="submit" value="Xóa">
+              </form>
+              <form action="jobs" method="GET">
+                <input type="text" name="edit" value="1" id="edit" hidden>
+                <input type="text" name="jobId" value="<%= job.getJobId()%>" id="jobId1" hidden>
+                <input class="w-[100px] text-center py-1 rounded-lg border bg-[#009643] text-white" type="submit" value="Cập nhật">
+              </form>
+            </div>
+          </div>
         </div>
         <% } %>
       </div>

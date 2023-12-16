@@ -23,6 +23,16 @@ public class Job {
         this.companyId = companyId;
     }
 
+    public Job(int jobId, String title, String description, String requirements, double salary, String location, int companyId) {
+        this.title = title;
+        this.description = description;
+        this.requirements = requirements;
+        this.salary = salary;
+        this.location = location;
+        this.companyId = companyId;
+        this.jobId = jobId;
+    }
+
     // Getter and Setter for jobId
     public int getJobId() {
         return jobId;
