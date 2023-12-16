@@ -16,8 +16,8 @@ public class JobBO {
         return jobDAO.getAllJobs();
     }
 
-    public List<JobDTO> getFilteredJobs(String keyword, String location, String salary) {
-        return jobDAO.getFilteredJobs(keyword, location, salary);
+    public List<JobDTO> getFilteredJobs(int companyId, String keyword, String location, String salary) {
+        return jobDAO.getFilteredJobs(companyId, keyword, location, salary);
     }
 
     public Job getJobById(int jobId) {

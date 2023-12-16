@@ -22,18 +22,24 @@ public class JobController extends HttpServlet {
     JobBO jobBO = new JobBO();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jobIdParam = request.getParameter("jobId");
-
+        String companyIdParam = request.getParameter("companyId");
         if (jobIdParam != null && !jobIdParam.isEmpty()) {
             // Nếu có param jobId, gọi đến detailJob
             int jobId = Integer.parseInt(jobIdParam);
             detailJob(request, response, jobId);
-        } else {
-            JobDAO jobDAO = new JobDAO();
-            List<JobDTO> jobs = jobDAO.getAllJobs();
+        } else if (companyIdParam != null && !companyIdParam.isEmpty()) {
+            int companyId = Integer.parseInt(companyIdParam);
+            List<JobDTO> jobs = jobBO.getFilteredJobs(companyId, "", "", "");
+            request.setAttribute("jobList", jobs);
+
+            RequestDispatcher rd = request.getRequestDispatcher("jobs/listJobs.jsp");
+            rd.forward(request, response);
+        } else  {
+            List<JobDTO> jobs = jobBO.getAllJobs();
 
             request.setAttribute("jobList", jobs);
 
-            RequestDispatcher rd = request.getRequestDispatcher("job/index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
     }
@@ -63,7 +69,7 @@ public class JobController extends HttpServlet {
             if (job != null) {
                 request.setAttribute("job", job);
 
-                RequestDispatcher rd = request.getRequestDispatcher("/jobs/detail.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("jobs/detail.jsp");
                 rd.forward(request, response);
             } else {
                 response.getWriter().println("Job not found");

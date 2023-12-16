@@ -12,7 +12,7 @@
     String salary = request.getParameter("search-salary");
 
     JobBO jobBO = new JobBO();
-    List<JobDTO> filteredJobList = jobBO.getFilteredJobs(keyword, location, salary);
+    List<JobDTO> filteredJobList = jobBO.getFilteredJobs(0, keyword, location, salary);
 
     List<String> cityList = new ArrayList<>(List.of(
             "Hồ Chí Minh",

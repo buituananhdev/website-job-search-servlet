@@ -44,7 +44,7 @@ public class JobDAO {
         return jobs;
     }
 
-    public List<JobDTO> getFilteredJobs(String keyword, String location, String salary) {
+    public List<JobDTO> getFilteredJobs(int companyId, String keyword, String location, String salary) {
         List<JobDTO> filteredJobList = new ArrayList<>();
 
         keyword = (keyword != null) ? keyword.trim() : "";
@@ -53,18 +53,21 @@ public class JobDAO {
 
         String filteredQuery = GET_ALL_JOBS;
 
-        if (!keyword.isEmpty() || !location.isEmpty() || !salary.isEmpty()) {
+        if (!keyword.isEmpty() || !location.isEmpty() || !salary.isEmpty() || companyId > 0) {
             filteredQuery += " WHERE ";
+
             if (!keyword.isEmpty()) {
                 filteredQuery += "title LIKE ? AND ";
             }
             if (!location.isEmpty()) {
                 filteredQuery += "location = ? AND ";
             }
+            if( companyId > 0) {
+                filteredQuery += "company_id = ? AND ";
+            }
             if (!salary.isEmpty()) {
                 filteredQuery += getSalaryRangeCondition(Integer.parseInt(salary)) + " AND ";
             }
-
             filteredQuery = filteredQuery.replaceAll(" AND $", "");
         }
 
@@ -77,6 +80,9 @@ public class JobDAO {
             }
             if (!location.isEmpty()) {
                 preparedStatement.setString(parameterIndex++, location);
+            }
+            if (companyId > 0) {
+                preparedStatement.setInt(parameterIndex++, companyId);
             }
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
